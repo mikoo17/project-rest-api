@@ -3,10 +3,12 @@ import java.util.Optional;
 
 import com.project.repository.ZadanieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import com.project.model.Projekt;
+import com.project.model.Zadanie;
 import com.project.repository.ProjektRepository;
 @Service
 public class ProjektServiceImpl implements ProjektService {
@@ -23,21 +25,23 @@ public class ProjektServiceImpl implements ProjektService {
     }
     @Override
     public Projekt setProjekt(Projekt projekt) {
-//TODO
-        return null;
+
+        return projektRepository.save(projekt);
     }
     @Override
+    @Transactional
     public void deleteProjekt(Integer projektId) {
-//TODO
+        for (Zadanie zadanie : zadanieRepository.findZadaniaProjektu(projektId)) {
+            zadanieRepository.delete(zadanie);
+        }
+        projektRepository.deleteById(projektId);
     }
     @Override
     public Page<Projekt> getProjekty(Pageable pageable) {
-//TODO
-        return null;
+        return projektRepository.findAll(pageable);
     }
     @Override
     public Page<Projekt> searchByNazwa(String nazwa, Pageable pageable) {
-//TODO
-        return null;
+        return projektRepository.findByNazwaContainingIgnoreCase(nazwa, pageable);
     }
 }

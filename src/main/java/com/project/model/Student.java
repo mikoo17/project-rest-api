@@ -17,6 +17,9 @@ import java.util.Set;
 
 
 import jakarta.persistence.Index;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.JoinColumn;
 @Entity //Indeksujemy kolumny, które są najczęściej wykorzystywane do wyszukiwania studentów
 @Table(name = "student",
         indexes = { @Index(name = "idx_nazwisko", columnList = "nazwisko", unique = false),
@@ -45,6 +48,17 @@ public class Student {
 
     @Column(name = "stacjonarny", nullable = true)
     private boolean stacjonarny;
+
+
+
+    @ManyToMany(mappedBy = "studenci")
+    private Set<Projekt> projekty;
+
+    @ManyToMany
+    @JoinTable(name = "projekt_student",
+            joinColumns = {@JoinColumn(name="projekt_id")},
+            inverseJoinColumns = {@JoinColumn(name="student_id")})
+    private Set<Student> studenci;
 
     public Integer getStudentId() {
         return studentId;
@@ -93,17 +107,15 @@ public class Student {
     public void setStacjonarny(boolean stacjonarny) {
         this.stacjonarny = stacjonarny;
     }
+    public Set<Projekt> getProjekty() { return projekty;}
+
+    public void setProjekty(Set<Projekt> projekty) {this.projekty = projekty; }
+
+    public Set<Student> getStudenci() {return studenci;}
+
+    public void setStudenci(Set<Student> studenci) {this.studenci = studenci;}
 
 
-
-
-
-
-    @ManyToMany(mappedBy = "studenci")
-    private Set<Projekt> projekty;
-    /* TODO Uzupełnij kod o zmienne reprezentujące pola tabeli student (patrz rys. 3.1),
-    . następnie wygeneruj dla nich akcesory i mutatory (Source -> Generate Getters and Setters)
-    */
     public Student() {}
     public Student(String imie, String nazwisko, String nrIndeksu, Boolean stacjonarny) {
         this.imie = imie;
