@@ -3,6 +3,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
@@ -112,6 +113,20 @@ public class Projekt {
     public Projekt(String nazwa, String opis) {
         this.nazwa = nazwa;
         this.opis = opis;
+    }
+    public Projekt(String nazwa, String opis, LocalDate dataUtworzenia) {
+        this.nazwa = nazwa;
+        this.opis = opis;
+        this.dataCzasUtworzenia = dataUtworzenia.atStartOfDay();
+        this.dataCzasModyfikacji = LocalDateTime.now();
+    }
+
+    public Projekt(Integer projektId, String nazwa, String opis, LocalDate dataUtworzenia) {
+        this.projektId = projektId;
+        this.nazwa = nazwa;
+        this.opis = opis;
+        this.dataCzasUtworzenia = dataUtworzenia.atStartOfDay();
+        this.dataCzasModyfikacji = LocalDateTime.now();
     }
     /*TODO Uzupełnij kod o zmienne reprezentujące pozostałe pola tabeli projekt (patrz rys. 3.1),
 . następnie wygeneruj dla nich tzw. akcesory i mutatory (Source -> Generate Getters and Setters),
