@@ -18,7 +18,7 @@ import java.net.URI;
 @RestController
 @RequestMapping("/api")
 public class StudentRestController {
-    private StudentService studentService = null; // dodane, ponieważ metoda z pageable nie działała prawidłowo
+    private static StudentService studentService = null; // dodane, ponieważ metoda z pageable nie działała prawidłowo
 
     @Autowired
     public StudentRestController(StudentService studentService) {
@@ -55,8 +55,8 @@ public class StudentRestController {
         }).orElseGet(() -> ResponseEntity.notFound().build()); // 404 - Not found
     }
     //Przykład żądania wywołującego metodę: http://localhost:8080/api/projekty?page=0&size=10&sort=nazwa,desc
-    /*@GetMapping(value = "/studenci")
+    @GetMapping(value = "/studenci")
     public static Page<Student> getStudenci(Pageable pageable) { // @RequestHeader HttpHeaders headers – jeżeli potrzebny
         return studentService.getStudenci(pageable); // byłby nagłówek, wystarczy dodać drugą zmienną z adnotacją
-    }*/
+    }
 }

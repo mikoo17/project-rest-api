@@ -121,6 +121,7 @@ public class Student {
         this.imie = imie;
         this.nazwisko = nazwisko;
         this.nrIndeksu = nrIndeksu;
+        this.stacjonarny = stacjonarny;
     }
     public Student(String imie, String nazwisko, String nrIndeksu, String email, Boolean stacjonarny) {
         this.imie = imie;

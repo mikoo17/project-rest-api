@@ -8,6 +8,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 public class ZadanieServiceImpl implements ZadanieService {
     private ZadanieRepository zadanieRepository;
@@ -18,8 +20,8 @@ public class ZadanieServiceImpl implements ZadanieService {
     }
 
     @Override
-    public Zadanie getZadanie(Integer zadanieId) {
-        return zadanieRepository.findById(zadanieId).orElse(null);
+    public Optional<Zadanie> getZadanie(Integer zadanieId) {
+        return zadanieRepository.findById(zadanieId);
     }
 
     @Override
