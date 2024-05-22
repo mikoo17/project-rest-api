@@ -102,14 +102,11 @@ public class Zadanie {
     public Zadanie() {
     }
 
-    public Zadanie(String nazwa, Integer kolejnosc, String opis) {
+    public Zadanie(String nazwa, Integer kolejnosc, String opis, Integer projektId) {
         this.nazwa = nazwa;
         this.kolejnosc = kolejnosc;
         this.opis = opis;
+        this.projektId = projektId;
     }
 
-    /*TODO Uzupełnij kod o zmienne reprezentujące pozostałe pola tabeli zadanie (patrz rys. 3.1),
-. następnie wygeneruj dla nich akcesory i mutatory (Source -> Generate Getters and Setters),
-. ponadto dodaj pusty konstruktor oraz konstruktor ze zmiennymi nazwa, opis i kolejnosc.
-*/
 }
